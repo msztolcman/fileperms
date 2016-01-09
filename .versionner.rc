@@ -41,3 +41,10 @@ match = line
 search = \b\d+\.\d+\.\d+\.zip\b
 replace = %(version)s.zip
 encoding = utf-8
+
+[file:3:README.md]
+enabled = true
+match = line
+search = \bcd fileperms-\d+\.\d+\.\d+\b
+replace = cd fileperms-%(version)s
+encoding = utf-8
