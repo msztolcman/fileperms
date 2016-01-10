@@ -24,7 +24,7 @@ with open(path.join(BASE_DIR, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='fileperms',
-    version='1.0.0',
+    version='1.0.1',
     description='fileperms is small library for describing file permissions',
     long_description=long_description,
     url='http://msztolcman.github.io/fileperms/',

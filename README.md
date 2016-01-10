@@ -122,6 +122,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ChangeLog
 ---------
 
+### v1.0.1
+
+* documentation and pylint
+* dev packages upgraded
+
 ### v1.0.0
 
 * first public version
