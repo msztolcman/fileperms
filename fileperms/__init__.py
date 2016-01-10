@@ -1,3 +1,7 @@
+"""
+fileperms is small library for describing file permissions.
+"""
+
 import enum
 import os
 import pathlib
@@ -6,7 +10,11 @@ import stat
 
 __version__ = '1.0.0'
 
+
 class Permission(enum.IntEnum):
+    """
+    Enum with available permissions
+    """
     suid = stat.S_ISUID
     sgid = stat.S_ISGID
     sticky = stat.S_ISVTX
@@ -24,7 +32,11 @@ class Permission(enum.IntEnum):
     other_exec = stat.S_IXOTH
 
 
+# pylint: disable=too-many-instance-attributes
 class Permissions:
+    """
+    Class that helps manipulating permissions of file
+    """
     RXP_FILEMODE = re.compile(r'^[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]$')
     RXP_OCTAL = re.compile(r'^[0-7]{3,4}$')
 
@@ -42,14 +54,30 @@ class Permissions:
         self.other_write = False
         self.other_exec = False
 
-    def set(self, perm: Permission, value):
+    def set(self, perm: Permission, value: bool):
+        """
+        Enable or disable permission
+        :param perm:One of Permission item
+        :param value:
+        :return:
+        """
         setattr(self, perm.name, value)
 
     def get(self, perm: Permission):
+        """
+        Return value of permission
+        :param perm:
+        :return:
+        """
         return getattr(self, perm.name)
 
     @classmethod
     def from_path(cls, path):
+        """
+        Read files permissions and create Permissions object with filled properties
+        :param path:String or pathlib.Path
+        :return:
+        """
         if isinstance(path, pathlib.Path):
             modes = path.lstat().st_mode
         elif isinstance(path, str):
@@ -65,6 +93,11 @@ class Permissions:
 
     @classmethod
     def from_int(cls, perms: int):
+        """
+        Create Permissions object, read permissions from int value
+        :param perms:
+        :return:
+        """
         try:
             filemode = stat.filemode(perms)
         except OverflowError as exc:
@@ -78,6 +111,11 @@ class Permissions:
 
     @classmethod
     def from_octal(cls, perms: str):
+        """
+        Create Permissions object, read permissions from octal value
+        :param perms:
+        :return:
+        """
         if not cls.RXP_OCTAL.match(perms):
             raise ValueError("Invalid format of permissions: %s" % perms)
         if len(perms) == 3:
@@ -87,6 +125,11 @@ class Permissions:
 
     @classmethod
     def from_filemode(cls, perms: str):
+        """
+        Create Permissions object, read permissions from string in format: rwxrwxrwx
+        :param perms:
+        :return:
+        """
         if len(perms) == 10:
             perms = perms[1:]
 
@@ -112,6 +155,10 @@ class Permissions:
         return prm
 
     def to_octal(self):
+        """
+        Dump Permissions to octal format
+        :return:
+        """
         octal = (
             str(
                 (0 if not self.suid else 4) |
@@ -135,15 +182,24 @@ class Permissions:
             ),
         )
 
+        # pylint: disable=redefined-variable-type
         octal = ''.join(octal)
 
         return octal
 
     def to_int(self):
+        """
+        Dump Permissions to int format
+        :return:
+        """
         octal = self.to_octal()
         return int(octal, 8)
 
     def to_filemode(self):
+        """
+        Dump Permissions to filemode format
+        :return:
+        """
         return stat.filemode(self.to_int())[1:]
 
     __str__ = to_octal
