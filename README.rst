@@ -28,24 +28,31 @@ Some examples
 
 ::
 
+    # Create Permissions object from existing file:
     >>> import fileperms
     >>> fileperms.Permissions.from_path('/etc')
     <Permissions(0755)>
-      
+
+    # We are working on object with permissions 0600 / rw-------
     >>> import os, stat
     >>> print(stat.filemode(os.stat(path).st_mode))
     -rw-------
+
+    # Verify that
     >>> prm = fileperms.Permissions.from_path(path)
     >>> prm
     <Permissions(0600)>
     >>> prm.to_filemode()
     'rw-------'
+
+    # Change them a little using os.chmod
     >>> prm.owner_exec = True
     >>> prm.other_exec = True
     >>> os.chmod(path, prm)
     >>> print(stat.filemode(os.stat(path).st_mode))
     -rwx-----x
 
+    # Change them more, using pathlib module this time
     >>> import pathlib
     >>> path = pathlib.Path(path)
     >>> prm.group_read = True
@@ -141,6 +148,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ChangeLog
 ---------
+
+v1.0.3
+~~~~~~
+
+-  improved documentation
 
 v1.0.2
 ~~~~~~
