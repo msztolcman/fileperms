@@ -84,7 +84,7 @@ class Permissions:
         elif isinstance(path, str):
             modes = os.lstat(path).st_mode
         else:
-            raise TypeError("path must be a string or pathilb.Path instance")
+            raise TypeError("path must be a string or pathlib.Path instance")
 
         prm = cls()
         for mode in Permission:
