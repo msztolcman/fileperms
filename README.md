@@ -24,6 +24,11 @@ For Python 3.3 [enum34](https://pypi.python.org/pypi/enum34) library must be ins
 Some examples
 -------------
 
+    # Some helper
+    >>> def show_permissions(path):
+    >>>     print(stat.filemode(os.stat(path).st_mode))
+    >>>
+
     # Create Permissions object from existing file:
     >>> import fileperms
     >>> fileperms.Permissions.from_path('/etc')
@@ -31,7 +36,7 @@ Some examples
 
     # We are working on object with permissions 0600 / rw-------
     >>> import os, stat
-    >>> print(stat.filemode(os.stat(path).st_mode))
+    >>> show_permissions(path)
     -rw-------
 
     # Verify that
@@ -45,7 +50,7 @@ Some examples
     >>> prm.owner_exec = True
     >>> prm.other_exec = True
     >>> os.chmod(path, prm)
-    >>> print(stat.filemode(os.stat(path).st_mode))
+    >>> show_permissions(path)
     -rwx-----x
 
     # Change them more, using pathlib module this time
@@ -54,7 +59,7 @@ Some examples
     >>> prm.group_read = True
     >>> prm.group_write = True
     >>> path.chmod(prm)
-    >>> print(stat.filemode(path.stat().st_mode))
+    >>> show_permissions(path)
     -rwxrw---x
 
 Installation
