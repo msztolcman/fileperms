@@ -68,7 +68,7 @@ class Permissions:
         """
         Return value of permission
         :param perm:
-        :return:
+        :return Permission:
         """
         return getattr(self, perm.name)
 
