@@ -153,6 +153,7 @@ v1.0.3
 ~~~~~~
 
 -  improved documentation
+-  Permissions.set method now returns self
 
 v1.0.2
 ~~~~~~

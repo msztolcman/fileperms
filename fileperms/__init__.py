@@ -59,9 +59,10 @@ class Permissions:
         Enable or disable permission
         :param perm:One of Permission item
         :param value:
-        :return:
+        :return self:
         """
         setattr(self, perm.name, value)
+        return self
 
     def get(self, perm: Permission):
         """
