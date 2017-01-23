@@ -68,7 +68,7 @@ class Permissions:
         """
         Return value of permission
         :param perm:
-        :return Permission:
+        :return bool:
         """
         return getattr(self, perm.name)
 
@@ -131,6 +131,8 @@ class Permissions:
         :param perms:
         :return:
         """
+
+        # trim optional 'type' from file mode (d, - or similar from 'drwxrwxrwx')
         if len(perms) == 10:
             perms = perms[1:]
 
