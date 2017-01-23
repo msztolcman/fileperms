@@ -52,7 +52,8 @@ Some examples
 
     # Change them a little using os.chmod
     >>> prm.owner_exec = True
-    >>> prm.other_exec = True
+    # or using setter:
+    >>> prm.set(fileperms.Permission.other_exec, True)
     >>> os.chmod(path, prm)
     >>> show_permissions(path)
     -rwx-----x
