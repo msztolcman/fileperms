@@ -33,6 +33,10 @@ Some examples
     >>> import fileperms
     >>> fileperms.Permissions.from_path('/etc')
     <Permissions(0755)>
+    
+    # Or shorter:
+    >>> fileperms.from_path('/etc')
+    <Permissions(0755)>
 
     # We are working on object with permissions 0600 / rw-------
     >>> import os, stat
@@ -40,7 +44,7 @@ Some examples
     -rw-------
 
     # Verify that
-    >>> prm = fileperms.Permissions.from_path(path)
+    >>> prm = fileperms.from_path(path)
     >>> prm
     <Permissions(0600)>
     >>> prm.to_filemode()

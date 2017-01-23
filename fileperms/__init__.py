@@ -208,3 +208,35 @@ class Permissions:
 
     def __repr__(self):
         return '<Permissions(%s)>' % self
+
+
+def from_path(path):
+    """Create Permissions instance reading permissions from path.
+
+    Shortcut for Permissions.from_path()
+    """
+    return Permissions.from_path(path)
+
+
+def from_int(perms: int):
+    """Create Permissions instance reading permissions from integer value.
+
+    Shortcut for Permissions.from_int()
+    """
+    return Permissions.from_int(perms)
+
+
+def from_octal(perms: str):
+    """Create Permissions instance reading permissions from octal value.
+
+    Shortcut for Permissions.from_oct()
+    """
+    return Permissions.from_octal(perms)
+
+
+def from_filemode(perms: str):
+    """Create Permissions instance reading permissions from string in format: rwxrwxrwx.
+
+    Shortcut for Permissions.from_filemode()
+    """
+    return Permissions.from_filemode(perms)
