@@ -1,7 +1,7 @@
 import itertools
 import pytest
 
-from fileperms import Permissions
+from fileperms import Permissions, from_int
 
 class TestFromInt:
     def test_valid(self):
@@ -15,6 +15,28 @@ class TestFromInt:
             item_int = int(item, 8)
 
             perm = Permissions.from_int(item_int)
+
+            assert isinstance(perm, Permissions)
+            assert perm.to_octal() == item
+
+            item = item[1:]
+
+            perm = Permissions.from_octal(item)
+
+            assert isinstance(perm, Permissions)
+            assert perm.to_octal() == '0' + item
+
+    def test_valid_shortcut(self):
+        perms = '0 1 2 3 4 5 6 7'.split()
+
+        perms = itertools.permutations(perms, 4)
+        for item in perms:
+            item = ''.join(item)
+            assert len(item) == 4
+
+            item_int = int(item, 8)
+
+            perm = from_int(item_int)
 
             assert isinstance(perm, Permissions)
             assert perm.to_octal() == item

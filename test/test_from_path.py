@@ -5,7 +5,7 @@ import tempfile
 
 import pytest
 
-from fileperms import Permissions
+from fileperms import Permissions, from_path
 
 class TestFromOctal:
     def test_valid(self):
@@ -25,6 +25,28 @@ class TestFromOctal:
 
                 path2 = pathlib.Path(path)
                 perm = Permissions.from_path(path2)
+                assert isinstance(perm, Permissions)
+                assert perm.to_octal() == item
+        finally:
+            os.unlink(path)
+
+    def test_valid_shortcut(self):
+        path = tempfile.mkstemp()[1]
+
+        perms = '0 1 2 3 4 5 6 7'.split()
+        perms = itertools.permutations(perms, 4)
+
+        try:
+            for item in perms:
+                item = ''.join(item)
+                os.chmod(path, int(item, 8))
+
+                perm = Permissions.from_path(path)
+                assert isinstance(perm, Permissions)
+                assert perm.to_octal() == item
+
+                path2 = pathlib.Path(path)
+                perm = from_path(path2)
                 assert isinstance(perm, Permissions)
                 assert perm.to_octal() == item
         finally:

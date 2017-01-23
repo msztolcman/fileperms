@@ -1,7 +1,7 @@
 import itertools
 import pytest
 
-from fileperms import Permissions
+from fileperms import Permissions, from_filemode
 
 class TestFromFilemode:
     def test_valid(self):
@@ -17,6 +17,23 @@ class TestFromFilemode:
             assert len(item) == 9
 
             perm = Permissions.from_filemode(item)
+
+            assert isinstance(perm, Permissions)
+            assert perm.to_filemode() == item
+
+    def test_valid_shortcut(self):
+        perms = (
+            ('-r', '-w', '-xsS'),
+            ('-r', '-w', '-xsS'),
+            ('-r', '-w', '-xtT'),
+        )
+
+        perms = itertools.product(*perms[0], *perms[1], *perms[2])
+        for item in perms:
+            item = ''.join(item)
+            assert len(item) == 9
+
+            perm = from_filemode(item)
 
             assert isinstance(perm, Permissions)
             assert perm.to_filemode() == item
