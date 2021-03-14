@@ -6,7 +6,7 @@ fileperms
 Current stable version
 ----------------------
 
-1.0.2
+1.0.4
 
 Features
 --------
@@ -24,30 +24,42 @@ For Python 3.3 [enum34](https://pypi.python.org/pypi/enum34) library must be ins
 Some examples
 -------------
 
+    # Some helper
+    >>> def show_permissions(path):
+    >>>     print(stat.filemode(os.stat(path).st_mode))
+    >>>
+
+    # Create Permissions object from existing file:
     >>> import fileperms
     >>> fileperms.Permissions.from_path('/etc')
     <Permissions(0755)>
-      
+
+    # We are working on object with permissions 0600 / rw-------
     >>> import os, stat
-    >>> print(stat.filemode(os.stat(path).st_mode))
+    >>> show_permissions(path)
     -rw-------
+
+    # Verify that
     >>> prm = fileperms.Permissions.from_path(path)
     >>> prm
     <Permissions(0600)>
     >>> prm.to_filemode()
     'rw-------'
+
+    # Change them a little using os.chmod
     >>> prm.owner_exec = True
     >>> prm.other_exec = True
     >>> os.chmod(path, prm)
-    >>> print(stat.filemode(os.stat(path).st_mode))
+    >>> show_permissions(path)
     -rwx-----x
-    
+
+    # Change them more, using pathlib module this time
     >>> import pathlib
     >>> path = pathlib.Path(path)
     >>> prm.group_read = True
     >>> prm.group_write = True
     >>> path.chmod(prm)
-    >>> print(stat.filemode(path.stat().st_mode))
+    >>> show_permissions(path)
     -rwxrw---x
 
 Installation
@@ -56,7 +68,7 @@ Installation
 1. Using PIP
 
 `fileperms` should work on any platform where [Python](http://python.org)
-is available, it means Linux, Windows, MacOS X etc, but is not tested on Windows. 
+is available, it means Linux, Windows, MacOS X etc, but is not tested on Windows.
 
 Simplest way is to use Python's built-in package system:
 
@@ -64,21 +76,21 @@ Simplest way is to use Python's built-in package system:
 
 2. Using sources
 
-Download sources from [Github](https://github.com/msztolcman/fileperms/archive/1.0.2.zip):
+Download sources from [Github](https://github.com/msztolcman/fileperms/archive/1.0.4.zip):
 
-    wget -O 1.0.2.zip https://github.com/msztolcman/fileperms/archive/1.0.2.zip
-    
+    wget -O 1.0.4.zip https://github.com/msztolcman/fileperms/archive/1.0.4.zip
+
 or
 
-    curl -o 1.0.2.zip https://github.com/msztolcman/fileperms/archive/1.0.2.zip
+    curl -o 1.0.4.zip https://github.com/msztolcman/fileperms/archive/1.0.4.zip
 
 Unpack:
 
-    unzip 1.0.2.zip
+    unzip 1.0.4.zip
 
 And install
 
-    cd fileperms-1.0.2
+    cd fileperms-1.0.4
     python3 setup.py install
 
 Voila!
@@ -124,9 +136,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ChangeLog
 ---------
 
+### v1.0.4
+
+* updated README.rst
+
+### v1.0.3
+
+* improved documentation
+* Permissions.set method now returns self
+
 ### v1.0.2
 
-* not important 
+* not important
 
 ### v1.0.1
 
