@@ -1,5 +1,0 @@
--r requirements.txt
-pylint==1.5.2
-pytest==2.8.5
-twine==1.6.5
-wheel==0.26.0

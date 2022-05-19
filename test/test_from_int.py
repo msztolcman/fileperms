@@ -3,6 +3,7 @@ import pytest
 
 from fileperms import Permissions, from_int
 
+
 class TestFromInt:
     def test_valid(self):
         perms = '0 1 2 3 4 5 6 7'.split()

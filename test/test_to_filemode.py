@@ -5,6 +5,7 @@ import pytest
 
 from fileperms import Permissions, Permission
 
+
 class TestToFilemode:
     def test_mutated(self):
         perm = Permissions()

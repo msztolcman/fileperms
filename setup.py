@@ -5,10 +5,10 @@ import sys
 
 def validate_python_version():
     """
-    Validate python interpreter version. Only 3.3+ allowed.
+    Validate python interpreter version. Only 3.7+ allowed.
     """
-    if pkg_resources.parse_version(platform.python_version()) < pkg_resources.parse_version('3.3.0'):
-        print("Sorry, Python 3.3+ is required")
+    if pkg_resources.parse_version(platform.python_version()) < pkg_resources.parse_version('3.7.0'):
+        print("Sorry, Python 3.7+ is required")
         sys.exit(1)
 validate_python_version()
 
@@ -19,7 +19,7 @@ from setuptools import setup, find_packages
 
 BASE_DIR = path.abspath(path.dirname(__file__))
 
-with open(path.join(BASE_DIR, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(BASE_DIR, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
@@ -27,6 +27,7 @@ setup(
     version='1.0.4',
     description='fileperms is small library for describing file permissions',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='http://msztolcman.github.io/fileperms/',
     author='Marcin Sztolcman',
     author_email='marcin@urzenia.net',
@@ -42,9 +43,12 @@ setup(
         'Topic :: Software Development',
         'Topic :: Software Development :: Libraries',
         'Topic :: System :: Filesystems',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     install_requires=[],
     packages=find_packages(),

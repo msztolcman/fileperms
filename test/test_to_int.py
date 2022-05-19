@@ -5,6 +5,7 @@ import pytest
 
 from fileperms import Permissions, Permission
 
+
 class TestToInt:
     def test_mutated(self):
         perm = Permissions()

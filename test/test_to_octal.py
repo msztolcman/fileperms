@@ -5,6 +5,7 @@ import pytest
 
 from fileperms import Permissions, Permission
 
+
 class TestToOctal:
     def _to_oct(self, val):
         val = oct(val)[2:]

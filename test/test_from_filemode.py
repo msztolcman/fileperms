@@ -3,6 +3,7 @@ import pytest
 
 from fileperms import Permissions, from_filemode
 
+
 class TestFromFilemode:
     def test_valid(self):
         perms = (

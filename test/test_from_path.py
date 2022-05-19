@@ -7,6 +7,7 @@ import pytest
 
 from fileperms import Permissions, from_path
 
+
 class TestFromOctal:
     def test_valid(self):
         path = tempfile.mkstemp()[1]
