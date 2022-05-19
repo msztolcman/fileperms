@@ -2,7 +2,7 @@ title: Fileperms
 description: fileperms is small library for Python for describing file permissions
 google_analytics: UA-207617-22
 show_downloads: true
-theme: jekyll-theme-dinky
+theme: jekyll-theme-tactile
 
 gems:
   - jekyll-mentions
