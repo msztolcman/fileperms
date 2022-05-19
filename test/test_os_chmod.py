@@ -18,7 +18,7 @@ class TestOsChmod:
                 assert len(item) == 4
 
                 prm = Permissions.from_octal(item)
-                os.lchmod(path, prm)
+                os.lchmod(path, int(prm))
 
                 assert stat.filemode(os.lstat(path).st_mode)[1:] == prm.to_filemode()
         finally:

@@ -18,7 +18,7 @@ class TestPathlib:
                 assert len(item) == 4
 
                 prm = Permissions.from_octal(item)
-                path.lchmod(prm)
+                path.lchmod(int(prm))
 
                 assert stat.filemode(path.lstat().st_mode)[1:] == prm.to_filemode()
         finally:

@@ -54,7 +54,7 @@ Some examples
     >>> prm.owner_exec = True
     # or using setter:
     >>> prm.set(fileperms.Permission.other_exec, True)
-    >>> os.chmod(path, prm)
+    >>> os.chmod(path, int(prm))
     >>> show_permissions(path)
     -rwx-----x
 
@@ -63,7 +63,7 @@ Some examples
     >>> path = pathlib.Path(path)
     >>> prm.group_read = True
     >>> prm.group_write = True
-    >>> path.chmod(prm)
+    >>> path.chmod(int(prm))
     >>> show_permissions(path)
     -rwxrw---x
 
