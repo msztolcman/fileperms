@@ -8,7 +8,7 @@ import pathlib
 import re
 import stat
 
-__version__ = '1.0.4'
+__version__ = '1.1.0'
 
 
 class Permission(enum.IntEnum):
