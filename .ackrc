@@ -3,3 +3,5 @@
 --ignore-dir=venv
 --ignore-dir=venv-3
 --ignore-dir=fileperms.egg-info
+--ignore-dir=.venv
+--ignore-dir=.tox
