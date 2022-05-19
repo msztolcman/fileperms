@@ -17,9 +17,7 @@ Features
 Python version
 --------------
 
-`fileperms` works only with Python 3.3+. Older Python versions are unsupported.
-
-For Python 3.3 [enum34](https://pypi.python.org/pypi/enum34) library must be installed.
+`fileperms` works only with Python 3.7+. Older Python versions are unsupported.
 
 Some examples
 -------------
