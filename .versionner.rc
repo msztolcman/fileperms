@@ -16,11 +16,11 @@ match = line
 search = ^\s*__version__\s*=.*$
 replace = __version__ = '%(version)s'
 
-[file:setup.py]
+[file:setup.cfg]
 enabled = true
 match = line
 search = \bversion\s*=.*$
-replace = version='%(version)s',
+replace = version = %(version)s
 encoding = utf-8
 
 [file:README.md]
