@@ -13,6 +13,3 @@ twine = "==4.0.0"
 wheel = '==0.37.1'
 tox = "*"
 tox-asdf = "*"
-
-[requires]
-python_version = "3.7"
