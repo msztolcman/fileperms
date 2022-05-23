@@ -17,7 +17,7 @@ Features
 Python version
 --------------
 
-`fileperms` works only with Python 3.7+. Older Python versions are unsupported.
+`fileperms` works only with Python 3.7+. Older Python versions are supported with older package versions.
 
 Some examples
 -------------
