@@ -10,6 +10,8 @@ import stat
 
 __version__ = '1.1.1'
 
+from typing import Union
+
 
 class Permission(enum.IntEnum):
     """
@@ -40,7 +42,7 @@ class Permissions:
     RXP_FILEMODE = re.compile(r'^[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]$')
     RXP_OCTAL = re.compile(r'^[0-7]{3,4}$')
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.suid = False
         self.sgid = False
         self.sticky = False
@@ -54,7 +56,7 @@ class Permissions:
         self.other_write = False
         self.other_exec = False
 
-    def set(self, perm: Permission, value: bool):
+    def set(self, perm: Permission, value: bool) -> 'Permissions':
         """
         Enable or disable permission
         :param perm:One of Permission item
@@ -64,7 +66,7 @@ class Permissions:
         setattr(self, perm.name, value)
         return self
 
-    def get(self, perm: Permission):
+    def get(self, perm: Permission) -> bool:
         """
         Return value of permission
         :param perm:
@@ -73,7 +75,7 @@ class Permissions:
         return getattr(self, perm.name)
 
     @classmethod
-    def from_path(cls, path):
+    def from_path(cls, path: Union[pathlib.PurePath, str]) -> 'Permissions':
         """
         Read files permissions and create Permissions object with filled properties
         :param path:String or pathlib.Path
@@ -93,7 +95,7 @@ class Permissions:
         return prm
 
     @classmethod
-    def from_int(cls, perms: int):
+    def from_int(cls, perms: int) -> 'Permissions':
         """
         Create Permissions object, read permissions from int value
         :param perms:
@@ -111,7 +113,7 @@ class Permissions:
         return cls.from_filemode(filemode)
 
     @classmethod
-    def from_octal(cls, perms: str):
+    def from_octal(cls, perms: str) -> 'Permissions':
         """
         Create Permissions object, read permissions from octal value
         :param perms:
@@ -125,7 +127,7 @@ class Permissions:
         return cls.from_int(perms)
 
     @classmethod
-    def from_filemode(cls, perms: str):
+    def from_filemode(cls, perms: str) -> 'Permissions':
         """
         Create Permissions object, read permissions from string in format: rwxrwxrwx
         :param perms:
@@ -157,7 +159,7 @@ class Permissions:
 
         return prm
 
-    def to_octal(self):
+    def to_octal(self) -> str:
         """
         Dump Permissions to octal format
         :return:
@@ -190,7 +192,7 @@ class Permissions:
 
         return octal
 
-    def to_int(self):
+    def to_int(self) -> int:
         """
         Dump Permissions to int format
         :return:
@@ -198,7 +200,7 @@ class Permissions:
         octal = self.to_octal()
         return int(octal, 8)
 
-    def to_filemode(self):
+    def to_filemode(self) -> str:
         """
         Dump Permissions to filemode format
         :return:
@@ -208,11 +210,11 @@ class Permissions:
     __str__ = to_octal
     __int__ = to_int
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '<Permissions(%s)>' % self
 
 
-def from_path(path):
+def from_path(path: Union[pathlib.PurePath, str]) -> Permissions:
     """Create Permissions instance reading permissions from path.
 
     Shortcut for Permissions.from_path()
@@ -220,7 +222,7 @@ def from_path(path):
     return Permissions.from_path(path)
 
 
-def from_int(perms: int):
+def from_int(perms: int) -> Permissions:
     """Create Permissions instance reading permissions from integer value.
 
     Shortcut for Permissions.from_int()
@@ -228,7 +230,7 @@ def from_int(perms: int):
     return Permissions.from_int(perms)
 
 
-def from_octal(perms: str):
+def from_octal(perms: str) -> Permissions:
     """Create Permissions instance reading permissions from octal value.
 
     Shortcut for Permissions.from_oct()
@@ -236,7 +238,7 @@ def from_octal(perms: str):
     return Permissions.from_octal(perms)
 
 
-def from_filemode(perms: str):
+def from_filemode(perms: str) -> Permissions:
     """Create Permissions instance reading permissions from string in format: rwxrwxrwx.
 
     Shortcut for Permissions.from_filemode()
