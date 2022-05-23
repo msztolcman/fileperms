@@ -6,7 +6,7 @@ fileperms
 Current stable version
 ----------------------
 
-1.1.0
+1.1.1
 
 Features
 --------
@@ -79,21 +79,21 @@ Simplest way is to use Python's built-in package system:
 
 2. Using sources
 
-Download sources from [Github](https://github.com/msztolcman/fileperms/archive/1.1.0.zip):
+Download sources from [Github](https://github.com/msztolcman/fileperms/archive/1.1.1.zip):
 
-    wget -O 1.1.0.zip https://github.com/msztolcman/fileperms/archive/1.1.0.zip
+    wget -O 1.1.1.zip https://github.com/msztolcman/fileperms/archive/1.1.1.zip
 
 or
 
-    curl -o 1.1.0.zip https://github.com/msztolcman/fileperms/archive/1.1.0.zip
+    curl -o 1.1.1.zip https://github.com/msztolcman/fileperms/archive/1.1.1.zip
 
 Unpack:
 
-    unzip 1.1.0.zip
+    unzip 1.1.1.zip
 
 And install
 
-    cd fileperms-1.1.0
+    cd fileperms-1.1.1
     python3 setup.py install
 
 Voila!
@@ -138,6 +138,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ChangeLog
 ---------
+
+### v1.1.1
+* fixed tests
+* minor testing suite reconfig
+* updates setup.py
 
 ### v1.1.0
 

@@ -24,7 +24,7 @@ with open(path.join(BASE_DIR, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='fileperms',
-    version='1.1.0',
+    version='1.1.1',
     description='fileperms is small library for describing file permissions',
     long_description=long_description,
     long_description_content_type='text/markdown',
