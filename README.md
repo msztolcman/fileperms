@@ -75,7 +75,7 @@ is available, it means Linux, Windows, MacOS X etc, but is not tested on Windows
 
 Simplest way is to use Python's built-in package system:
 
-    pip3 install fileperms
+    python -m pip install fileperms
 
 2. Using sources
 
@@ -94,7 +94,7 @@ Unpack:
 And install
 
     cd fileperms-1.1.1
-    python3 setup.py install
+    python setup.py install
 
 Voila!
 
