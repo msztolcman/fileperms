@@ -149,6 +149,9 @@ ChangeLog
 ### v1.2.0
 * added `Permissions.apply` method for applying permissions (instead
   of `os.chmod` of `path.chmod`)
+* `Permissions.from_path` defines `path` as `pathlib.Path`, but *any* object with `stat` or
+  `lstat` method will work ([protocols](https://docs.python.org/3/library/typing.html#typing.Protocol)
+  are from Python 3.8 unfortunatelly)
 * rewritten internal package configuration to from `setup.py`
   to `setup.cfg`
 * improved descriptions, README etc
