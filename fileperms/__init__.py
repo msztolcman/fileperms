@@ -10,25 +10,7 @@ import stat
 
 __version__ = '1.1.1'
 
-from typing import Union, Protocol
-
-class LStatableObj(Protocol):
-    def lstat(self):
-        ...
-
-
-class StatableObj(Protocol):
-    def stat(self, *, follow_symlinks=True):
-        ...
-
-
-class ChmodableObj(Protocol):
-    def chmod(self, mode, *, follow_symlinks=True):
-        ...
-
-
-Statable = Union[str, StatableObj, LStatableObj]
-Chmodable = Union[str, ChmodableObj]
+from typing import Union
 
 
 class Permission(enum.IntEnum):
@@ -93,7 +75,7 @@ class Permissions:
         return getattr(self, perm.name)
 
     @classmethod
-    def from_path(cls, path: Statable) -> 'Permissions':
+    def from_path(cls, path: Union[str, pathlib.Path]) -> 'Permissions':
         """
         Read files permissions and create Permissions object with filled properties
         :param path:String or pathlib.Path
@@ -227,7 +209,7 @@ class Permissions:
         """
         return stat.filemode(self.to_int())[1:]
 
-    def apply(self, path: Chmodable) -> 'Permissions':
+    def apply(self, path: Union[str, pathlib.Path]) -> 'Permissions':
         """
         Apply Permissions to given path
         :param path:
