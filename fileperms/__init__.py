@@ -10,7 +10,25 @@ import stat
 
 __version__ = '1.1.1'
 
-from typing import Union
+from typing import Union, Protocol
+
+class LStatableObj(Protocol):
+    def lstat(self):
+        ...
+
+
+class StatableObj(Protocol):
+    def stat(self, *, follow_symlinks=True):
+        ...
+
+
+class ChmodableObj(Protocol):
+    def chmod(self, mode, *, follow_symlinks=True):
+        ...
+
+
+Statable = Union[str, StatableObj, LStatableObj]
+Chmodable = Union[str, ChmodableObj]
 
 
 class Permission(enum.IntEnum):
@@ -75,18 +93,20 @@ class Permissions:
         return getattr(self, perm.name)
 
     @classmethod
-    def from_path(cls, path: Union[pathlib.PurePath, str]) -> 'Permissions':
+    def from_path(cls, path: Statable) -> 'Permissions':
         """
         Read files permissions and create Permissions object with filled properties
         :param path:String or pathlib.Path
         :return:
         """
-        if isinstance(path, pathlib.Path):
+        if hasattr(path, 'lstat'):
             modes = path.lstat().st_mode
+        elif hasattr(path, 'stat'):
+            modes = path.stat(follow_symlinks=True).st_mode
         elif isinstance(path, str):
             modes = os.lstat(path).st_mode
         else:
-            raise TypeError("path must be a string or pathlib.Path instance")
+            raise TypeError("path must be a string or had stat/lstat method (like pathlib.Path)")
 
         prm = cls()
         for mode in Permission:
@@ -207,6 +227,21 @@ class Permissions:
         """
         return stat.filemode(self.to_int())[1:]
 
+    def apply(self, path: Chmodable) -> 'Permissions':
+        """
+        Apply Permissions to given path
+        :param path:
+        :return self:
+        """
+        if hasattr(path, 'chmod'):
+            path.chmod(int(self))
+        elif isinstance(path, str):
+            os.chmod(path, int(self))
+        else:
+            raise TypeError("path must be a string or had chmod method (like pathlib.Path)")
+
+        return self
+
     __str__ = to_octal
     __int__ = to_int
 
@@ -214,7 +249,7 @@ class Permissions:
         return '<Permissions(%s)>' % self
 
 
-def from_path(path: Union[pathlib.PurePath, str]) -> Permissions:
+def from_path(path: Union[pathlib.Path, str]) -> Permissions:
     """Create Permissions instance reading permissions from path.
 
     Shortcut for Permissions.from_path()

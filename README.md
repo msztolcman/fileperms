@@ -31,7 +31,7 @@ Some examples
     >>> import fileperms
     >>> fileperms.Permissions.from_path('/etc')
     <Permissions(0755)>
-    
+
     # Or shorter:
     >>> fileperms.from_path('/etc')
     <Permissions(0755)>
@@ -64,6 +64,13 @@ Some examples
     >>> path.chmod(int(prm))
     >>> show_permissions(path)
     -rwxrw---x
+
+    # You can also use Permissions.apply method for
+    # applying same permissions to other objects:
+    >>> prm.other_read = True
+    >>> prm.apply(path)
+    >>> show_permissions(path)
+    -rwxrwxr-x
 
 Installation
 ------------
@@ -138,6 +145,13 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ChangeLog
 ---------
+
+### v1.2.0
+* added `Permissions.apply` method for applying permissions (instead
+  of `os.chmod` of `path.chmod`)
+* rewritten internal package configuration to from `setup.py`
+  to `setup.cfg`
+* improved descriptions, README etc
 
 ### v1.1.1
 * fixed tests
