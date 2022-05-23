@@ -1,7 +1,7 @@
 fileperms
 ==========
 
-`fileperms` is small library for describing file permissions.
+`fileperms` helps you read, change and set file permissions
 
 Current stable version
 ----------------------
@@ -11,7 +11,7 @@ Current stable version
 Features
 --------
 
-* easy manipulating of permissions
+* easy manipulating of file permissions
 * works fine with `os.chmod` and `pathlib.Path`
 
 Python version

@@ -1,5 +1,5 @@
 """
-fileperms is small library for describing file permissions.
+fileperms helps you read, change and set file permissions
 """
 
 import enum
@@ -37,7 +37,7 @@ class Permission(enum.IntEnum):
 # pylint: disable=too-many-instance-attributes
 class Permissions:
     """
-    Class that helps manipulating permissions of file
+    Class that helps to manipulate permissions of file
     """
     RXP_FILEMODE = re.compile(r'^[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]$')
     RXP_OCTAL = re.compile(r'^[0-7]{3,4}$')
