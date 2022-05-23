@@ -3,7 +3,7 @@
 ## building
 distro: clean build upload ## build and upload distro to prod pypi
 
-distro-test: clean build upload ## build and upload distro to test pypi
+distro-test: clean build upload-test ## build and upload distro to test pypi
 
 clean: ## cleanup all distro
 	-rm -fr dist
