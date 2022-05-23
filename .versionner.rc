@@ -38,13 +38,13 @@ encoding = utf-8
 [file:2:README.md]
 enabled = true
 match = line
-search = \b\d+\.\d+\.\d+\.zip\b
+search = \b\d+\.\d+\.\d+(?:[\w-]+)?\.zip\b
 replace = %(version)s.zip
 encoding = utf-8
 
 [file:3:README.md]
 enabled = true
 match = line
-search = \bcd fileperms-\d+\.\d+\.\d+\b
+search = \bcd fileperms-\d+\.\d+\.\d+(?:[\w-]+)?\b
 replace = cd fileperms-%(version)s
 encoding = utf-8
