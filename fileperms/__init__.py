@@ -8,7 +8,7 @@ import pathlib
 import re
 import stat
 
-__version__ = '1.1.1'
+__version__ = '1.2.0'
 
 from typing import Union
 
