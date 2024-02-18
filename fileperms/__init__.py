@@ -63,6 +63,10 @@ class Permissions:
         :param value:
         :return self:
         """
+        if not isinstance(perm, Permission):
+            raise ValueError(f"Invalid permission: {perm}. It should be an instance of Permission enum.")
+        if not isinstance(value, bool):
+            raise ValueError(f"Invalid value: {value}. It should be a boolean.")
         setattr(self, perm.name, value)
         return self
 
@@ -72,6 +76,8 @@ class Permissions:
         :param perm:
         :return bool:
         """
+        if not isinstance(perm, Permission):
+            raise ValueError(f"Invalid permission: {perm}. It should be an instance of Permission enum.")
         return getattr(self, perm.name)
 
     @classmethod
